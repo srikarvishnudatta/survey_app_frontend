@@ -1,12 +1,15 @@
 import { EventData } from "@/types/types";
 import { CalendarIcon, ExternalLinkIcon } from "./icons/icons";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 
 
 
-function RecentCard({title, location, eventDate, generatedLink}: EventData) {
+function RecentCard({title, location, eventDate, generatedLink, id}: EventData) {
+    const navigate = useNavigate();
     return (
-        <div className="card card-border border-gray-600 bg-base-100 w-96 shadow-sm ">
+        <div className="card card-border border-gray-600 bg-base-100 w-96 shadow-sm " 
+        onClick={() => navigate(`/events/${id}`)}
+        >
         
         <div className="card-body">
         <h2 className="card-title">{title}</h2>

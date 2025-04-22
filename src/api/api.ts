@@ -18,6 +18,15 @@ async function getAllEvents(): Promise<{data: EventData[]}>{
     });
     return await response.json();
 }
+async function getEventById(eventId:string): Promise<{event: EventData}>{
+    const response = await fetch(`http://localhost:4000/events/${eventId}`, {
+        headers: {
+            "Content-type":"application/json"
+        },
+        method:"GET"
+    });
+    return await response.json();
+}
 async function getForm(surveyId:string): Promise<EventData>{
     const response = await fetch("http://localhost:4000/survey/"+surveyId,{
         headers: {
@@ -38,4 +47,4 @@ async function submitResponse(body: SurveyResponseData, surveyId:string){
     });
     return await response.json();
 }
-export {createNewEvent, getAllEvents, getForm, submitResponse}
+export {createNewEvent, getEventById, getAllEvents, getForm, submitResponse}
