@@ -2,6 +2,29 @@ import { getEventById } from "@/api/api";
 import { ExternalLinkIcon } from "@/components/icons/icons";
 import { useQuery } from "@tanstack/react-query";
 import { NavLink, useParams } from "react-router";
+import {Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis} from "recharts";
+const barData = [
+  {
+    "stars":"1",
+    "value":"10"
+  },
+  {
+    "stars":"2",
+    "value":"20"
+  },
+  {
+    "stars":"3",
+    "value":"2"
+  },
+  {
+    "stars":"4",
+    "value":"4"
+  },
+  {
+    "stars":"5",
+    "value":"2"
+  }
+];
 
 // event by id
 function Event() {
@@ -11,6 +34,9 @@ function Event() {
     queryKey: ["eventbyid", eventId],
     queryFn: () => getEventById(eventId),
   });
+  function handleClick(){
+
+  }
   return (
     <div className="grow pt-4 px-2">
       {data && (
@@ -35,9 +61,14 @@ function Event() {
             </button>
           </div>
           </div>
-          <p>
-            No survey data as the form is still accepting responses.
-          </p>
+          <BarChart width={730} height={250} data={barData}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis  dataKey="stars" label={{ value: 'Star Rating', position: 'insideBottom', offset: -5 }}/>
+          <YAxis label={{ value: 'Count', angle: -90, position: 'insideLeft' }}/>
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="value" name={"No. of ratings"} fill="#8884d8" onClick={handleClick} />
+          </BarChart>
         </div>
       )}
     </div>
